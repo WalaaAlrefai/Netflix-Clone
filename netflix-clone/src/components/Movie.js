@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import ModalMovie from './ModalMovie'
 import { useState } from 'react';
 export default function Movie(props){
-    console.log(11111111111,props.movie)
+//     console.log(11111111111,props.movie)
 
 const [show,setShow]=useState(false)
 const handleClose=()=>setShow(false);
@@ -15,7 +15,7 @@ const handleShow=()=>setShow(true);
                 <Card.Body>
                    <Card.Title>{props.movie.title}</Card.Title>
                    <Card.Text>{props.movie.release_date}</Card.Text>
-                   <Button varient='primary' onClick={handleShow}>add to the favorite list</Button>
+                   <Button varient='primary' onClick={handleShow}>show Details</Button>
 
                 </Card.Body>
           </Card>

@@ -1,9 +1,18 @@
-import logo from './logo.svg';
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Home from './components/Home';
+import NavBar from "./components/NavBar";
+import FavList from "./components/FavList";
 function App() {
   return (
-    <Home />
+    // <Home />
+    <>
+  <NavBar />
+  <Routes>
+    <Route path="/" element={<Home />}> </Route>
+    <Route path="/favorite" element={<FavList />}></Route>
+  </Routes>
+  </>
   );
 }
 

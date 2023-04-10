@@ -14,6 +14,32 @@ export default function ModalMovie(props){
 
          props.commentHandler(newMovie,newMovie.id)
     }
+
+    async function addToFavHandler(e,movie){
+        e.preventDefault();
+        let url=`${process.env.REACT_APP_SERVER_URL}/addMovie`
+        // [title,release_date,poster_path,overview,comment]
+
+        let data={
+            title:props.movieData.title,
+            release_date:props.movieData.release_date,
+            poster_path:props.movieData.poster_path,
+            overview:props.movieData.overview,
+            comment:props.movieData.comment
+        }
+        console.log("data is",data)
+        const response = await fetch(url,{
+            method:"POST", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+
+        })
+        const recivedData = await response.json();
+        console.log(55555,recivedData)
+       
+    }
 return(
     
 <Modal show={props.show} onHide={props.handleClose}>
@@ -35,6 +61,10 @@ return(
 
       <Button variant="primary" type="submit" onClick={(e)=>submitHandler(e)}>
         Submit
+      </Button>
+
+      <Button variant="success" type="submit" onClick={(e)=>addToFavHandler(e)} >
+        add to favorite
       </Button>
     </Form></Modal.Body>
         <Modal.Footer>
