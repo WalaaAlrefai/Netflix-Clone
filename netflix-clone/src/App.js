@@ -10,7 +10,7 @@ function App() {
   <NavBar />
   <Routes>
     <Route path="/" element={<Home />}> </Route>
-    <Route path="/favorite" element={<FavList />}></Route>
+    <Route path="/getMovies" element={<FavList />}></Route>
   </Routes>
   </>
   );
