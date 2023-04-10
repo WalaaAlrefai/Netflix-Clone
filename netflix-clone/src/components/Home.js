@@ -17,10 +17,23 @@ export default function Home(){
         setMovies(moviesData);
         console.log(44444,movies);
     }
+    function commentHandler(newMovie,id){
+       movies.map(movie=>{
+         if(movie.id ===id){
+            movie.comment=newMovie.userComment;
+            return movie;
+         }else{
+            return movie
+         }
+       })
+    }
+
+
+
     useEffect(()=>{getMovies()},[])
     return(
         <>
-        < MovieList movies={movies}/>
+        < MovieList movies={movies} commentHandler={commentHandler}/>
         </>
     )
     

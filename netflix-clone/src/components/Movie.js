@@ -19,7 +19,7 @@ const handleShow=()=>setShow(true);
 
                 </Card.Body>
           </Card>
-          <ModalMovie show={show} handleClose={handleClose} movieData={props.movie}/>    
+          <ModalMovie show={show} handleClose={handleClose} movieData={props.movie} commentHandler={props.commentHandler}/>    
       </>
     )
 }
