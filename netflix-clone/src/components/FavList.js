@@ -1,9 +1,22 @@
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form'
 import { useEffect, useState } from "react";
+import { useRef } from 'react';
+
 export default function FavList(){
+
+    const commentRef=useRef();
+
+
    const [favoriteMovie,setFavoriteMovie]=useState([])
+
+
+
     async function getFavorite(){
+        
+
+
         let url=`${process.env.REACT_APP_SERVER_URL}/getMovies`
         let response= await fetch(url,{
             method:'GET',
@@ -31,25 +44,47 @@ export default function FavList(){
   }
 }
 
-async function handleUpdate(id,comment){
-    let url=`${process.env.REACT_APP_SERVER_URL}/UPDATE/${id}`
+async function handleUpdate(id){
 
-    let data={
-        comment:comment
-    }
-    const response = await fetch(url,{
-        method:"PUT", 
+    let url = `${process.env.REACT_APP_SERVER_URL}/UPDATE/${id}`;
+    let userComment = commentRef.current.value;
+    let response = await fetch(url, {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({comment: userComment}),
     })
-    // const recivedData = await response.json();
-    // console.log(recivedData)
-    if(response.send ==="updated"){
-        // getFavorite();
-        alert ("successfuly Updated !!");
-    }
+    getFavorite();
+
+
+
+
+
+
+
+
+
+    
+    
+    // let url=`${process.env.REACT_APP_SERVER_URL}/UPDATE/${id}`
+
+    // let data={
+    //     comment:favoriteMovie.comment
+    // }
+    // const response = await fetch(url,{
+    //     method:"PUT", 
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: data,
+    // })
+    // // const recivedData = await response.json();
+    // // console.log(recivedData)
+    // if(response.send ==="updated"){
+    //     // getFavorite();
+    //     alert ("successfuly Updated !!");
+    // }
 }
 
 
@@ -67,8 +102,17 @@ async function handleUpdate(id,comment){
                     <Card.Body>
                        <Card.Title>{movie.Title}</Card.Title>
                        <Card.Text>{movie.overview}</Card.Text>
+                       <Form>
+
+                       <Form.Group className="mb-3" >
+                                            {movie.comment ? movie.comment : "No comment Added "}
+                                            <br></br>
+                                            <Form.Control id="textarea" ref={commentRef} as="textarea" rows={1} placeholder="Update your comment" />
+                        </Form.Group>
+                       </Form>
+                       
                        <Button variant="danger" onClick={()=>handleDelete(movie.id)} >Delete</Button><br /><br />
-                       <Button variant="warning" onClick={()=>handleUpdate(movie.id,movie.comment)} >Update comment</Button>
+                       <Button variant="warning" onClick={()=>handleUpdate(movie.id)} >Update comment</Button>
     
                     </Card.Body>
               </Card>
